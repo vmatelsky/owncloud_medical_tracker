@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MedicineTracker</string>
+    <string name="height_and_weight"><![CDATA[Height & Weight]]></string>
+    <string name="medicine_reminder">Medicine reminder</string>
 </resources>
