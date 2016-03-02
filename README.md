@@ -1,1 +1,1 @@
-# owncloud_medical_tracker
+# Medicine tracker for owncloud
