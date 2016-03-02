@@ -2,4 +2,10 @@
     <string name="app_name">MedicineTracker</string>
     <string name="height_and_weight"><![CDATA[Height & Weight]]></string>
     <string name="medicine_reminder">Medicine reminder</string>
+    <string name="title_activity_height_and_weight">HeightAndWeightActivity</string>
+    <string name="weight">Weight</string>
+    <string name="edit">edit</string>
+    <string name="add">Add</string>
+    <string name="height">Height</string>
+    <string name="measure_date">Measure date</string>
 </resources>

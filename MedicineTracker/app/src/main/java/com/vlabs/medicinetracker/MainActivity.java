@@ -1,8 +1,9 @@
 package com.vlabs.medicinetracker;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.height_weight_button)
     void onHeightAndWeightClicked(final View view) {
-        Snackbar.make(view, getString(R.string.height_and_weight) + " clicked", Snackbar.LENGTH_LONG).show();
+        startActivity(new Intent(this, HeightAndWeightActivity.class));
     }
 
     @OnClick(R.id.medicine_reminder)
