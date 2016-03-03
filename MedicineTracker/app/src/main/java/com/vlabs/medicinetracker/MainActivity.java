@@ -2,30 +2,34 @@ package com.vlabs.medicinetracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import java.util.Arrays;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SectionsAdapter.SectionItemClickListener {
+
+    @Bind(R.id.sections)
+    RecyclerView mSections;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        final GridLayoutManager lm = new GridLayoutManager(this, getResources().getInteger(R.integer.sections_rows_count));
+        mSections.setLayoutManager(lm);
+        mSections.setHasFixedSize(true);
+        mSections.setAdapter(new SectionsAdapter(Arrays.asList(SectionItem.values()), this));
     }
 
-    @OnClick(R.id.height_weight_button)
-    void onHeightAndWeightClicked(final View view) {
-        startActivity(new Intent(this, HeightAndWeightActivity.class));
+    @Override
+    public void onSectionItemClicked(final SectionItem item) {
+        startActivity(new Intent(this, item.getHandleActivityClass()));
     }
-
-    @OnClick(R.id.medicine_reminder)
-    void onMedicineReminderClicked(final View view) {
-        Snackbar.make(view, getString(R.string.medicine_reminder) + " clicked", Snackbar.LENGTH_LONG).show();
-    }
-
 }
