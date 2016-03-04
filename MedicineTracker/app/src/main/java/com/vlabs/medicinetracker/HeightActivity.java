@@ -27,6 +27,7 @@ import butterknife.OnClick;
 public class HeightActivity extends AppCompatActivity {
 
     public static final String DATE_PATTERN = "dd/MM/yyyy";
+
     @Bind(R.id.edit_height)
     EditText mEditHeight;
 
