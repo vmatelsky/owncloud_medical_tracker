@@ -22,11 +22,6 @@ public class SectionViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final SectionItem item, final SectionsAdapter.SectionItemClickListener clickListener) {
         mTitle.setText(item.getTitleId());
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.onSectionItemClicked(item);
-            }
-        });
+        itemView.setOnClickListener(v -> clickListener.onSectionItemClicked(item));
     }
 }

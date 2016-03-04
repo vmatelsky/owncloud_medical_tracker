@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -59,13 +58,9 @@ public class HeightAndWeightActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view ->
+                                       Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                                               .setAction("Action", null).show());
 
         ButterKnife.bind(this);
 
@@ -73,7 +68,7 @@ public class HeightAndWeightActivity extends AppCompatActivity {
         mHeightMeasureDate.setText(formatDate(currentDate()));
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(this));
-        mAddedValues.setAdapter(new AddedPairsAdapter(new ArrayList<Pair<String, String>>()));
+        mAddedValues.setAdapter(new AddedPairsAdapter(new ArrayList<>()));
     }
 
     @Override
@@ -126,23 +121,17 @@ public class HeightAndWeightActivity extends AppCompatActivity {
 
     @OnClick(R.id.weight_measure_date)
     void onWeightMeasureDateClicked(final View view) {
-        selectDate(new OnDateSetListener() {
-            @Override
-            public void onDateSet(final DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
-                final Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-                mWeightMeasureDate.setText(formatDate(date));
-            }
+        selectDate((datePicker, year, monthOfYear, dayOfMonth) -> {
+            final Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
+            mWeightMeasureDate.setText(formatDate(date));
         });
     }
 
     @OnClick(R.id.height_measure_date)
     void onHeightMeasureDateClicked(final View view) {
-        selectDate(new OnDateSetListener() {
-            @Override
-            public void onDateSet(final DatePicker view, final int year, final int monthOfYear, final int dayOfMonth) {
-                final Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-                mWeightMeasureDate.setText(formatDate(date));
-            }
+        selectDate((datePicker, year, monthOfYear, dayOfMonth) -> {
+            final Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
+            mWeightMeasureDate.setText(formatDate(date));
         });
     }
 
