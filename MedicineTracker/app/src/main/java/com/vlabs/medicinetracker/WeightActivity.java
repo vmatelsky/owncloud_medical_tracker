@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vlabs.medicinetracker.units.Kilogram;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,12 +34,14 @@ public class WeightActivity extends AppCompatActivity {
     EditText mEditWeight;
 
     @Bind(R.id.weight_measure_date)
-    TextView mWeightMeasureDate;
+    TextView mWeightMeasureDateTextView;
+
+    Date mWeightMeasureDate = currentDate();
 
     @Bind(R.id.added_values)
     RecyclerView mAddedValues;
 
-    private final List<Pair<String, String>> mAddedWeights = new ArrayList<>();
+    private final List<Pair<Kilogram, Date>> mAddedWeights = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +50,10 @@ public class WeightActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mWeightMeasureDate.setText(formatDate(currentDate()));
+        mWeightMeasureDateTextView.setText(formatDate(mWeightMeasureDate));
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(this));
-        mAddedValues.setAdapter(new AddedPairsAdapter(mAddedWeights));
+        mAddedValues.setAdapter(new AddedPairsAdapter<>(mAddedWeights));
     }
 
     @OnClick(R.id.add_weight)
@@ -59,18 +63,18 @@ public class WeightActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(weight)) {
             Snackbar.make(view, "please specify weight", Snackbar.LENGTH_LONG).show();
         } else {
-            final Pair<String, String> pair = Pair.create(weight, mWeightMeasureDate.getText().toString().trim());
+            final Kilogram processedWeight = new Kilogram(Double.valueOf(weight)); // TODO: handle exception
+            final Pair<Kilogram, Date> pair = Pair.create(processedWeight, mWeightMeasureDate);
             mAddedWeights.add(pair);
             mAddedValues.getAdapter().notifyDataSetChanged();
         }
     }
 
-
     @OnClick(R.id.weight_measure_date)
     void onWeightMeasureDateClicked(final View view) {
         selectDate((datePicker, year, monthOfYear, dayOfMonth) -> {
-            final Date date = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-            mWeightMeasureDate.setText(formatDate(date));
+            mWeightMeasureDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
+            mWeightMeasureDateTextView.setText(formatDate(mWeightMeasureDate));
         });
     }
 
