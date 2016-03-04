@@ -1,8 +1,10 @@
-package com.vlabs.medicinetracker;
+package com.vlabs.medicinetracker.sections;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.vlabs.medicinetracker.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

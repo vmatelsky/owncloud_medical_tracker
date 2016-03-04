@@ -16,9 +16,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HeightAndWeightActivity"
-                  android:parentActivityName=".MainActivity"
-                  android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".HeightActivity"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".WeightActivity"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.vlabs.medicinetracker.sections.SectionItem;
+import com.vlabs.medicinetracker.sections.SectionsAdapter;
+
 import java.util.Arrays;
 
 import butterknife.Bind;

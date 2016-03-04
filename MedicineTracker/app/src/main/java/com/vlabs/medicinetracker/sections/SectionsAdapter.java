@@ -1,9 +1,11 @@
-package com.vlabs.medicinetracker;
+package com.vlabs.medicinetracker.sections;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.vlabs.medicinetracker.R;
 
 import java.util.List;
 
