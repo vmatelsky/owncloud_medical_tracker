@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.vlabs.medicinetracker.units.Kilogram;
+import com.vlabs.medicinetracker.units.metric.Kilogram;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
