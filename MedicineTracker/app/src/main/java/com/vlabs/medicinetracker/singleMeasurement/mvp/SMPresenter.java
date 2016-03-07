@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * Created by vlad on 3/8/16.
  */
-public class SMPresenter<Unit> implements ISMPresenter<Unit> {
+public class SMPresenter<Unit> {
 
     private final SMModel<Unit> mModel;
     private final SMView<Unit> mView;
@@ -37,12 +37,10 @@ public class SMPresenter<Unit> implements ISMPresenter<Unit> {
         }
     }
 
-    @Override
     public void setMeasurementDate(final Date measurementDate) {
         mModel.setMeasurementDate(measurementDate);
     }
 
-    @Override
     public View getView() {
         return mView.rootView();
     }

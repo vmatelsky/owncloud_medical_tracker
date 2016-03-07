@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.vlabs.medicinetracker.singleMeasurement.mvp.ISMPresenter;
 import com.vlabs.medicinetracker.singleMeasurement.mvp.SMInstance;
 import com.vlabs.medicinetracker.singleMeasurement.mvp.SMPresenter;
-import com.vlabs.medicinetracker.units.Converters;
 
 /**
  * Created by vlad on 3/4/16.
@@ -29,18 +27,7 @@ public class SingleMeasurementActivity extends AppCompatActivity {
 
         final SMInstance presenterInstance = SMInstance.valueOf(getIntent().getStringExtra(PRESENTER_TYPE_KEY));
 
-        final ISMPresenter presenter;
-        switch (presenterInstance) {
-            case Height:
-                presenter = new SMPresenter<>(Converters.STR_TO_HEIGHT, this);
-                break;
-            case Weight:
-                presenter = new SMPresenter<>(Converters.STR_TO_WEIGHT, this);
-                break;
-            default:
-                throw new RuntimeException("unknown single measurement type");
-        }
-
+        final SMPresenter presenter = presenterInstance.toPresenter(this);
         setContentView(presenter.getView());
     }
 

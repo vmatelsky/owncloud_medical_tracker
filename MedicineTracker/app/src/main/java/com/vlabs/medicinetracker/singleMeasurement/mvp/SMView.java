@@ -31,7 +31,7 @@ public class SMView<Unit> {
 
     private final View mRootView;
     private final AddedPairsAdapter<Unit, Date> mAdapter;
-    private final ISMPresenter<Unit> mPresenter;
+    private final SMPresenter<Unit> mPresenter;
     private final SMModel<Unit> mModel;
 
     @Bind(R.id.measurement_title)
@@ -47,7 +47,7 @@ public class SMView<Unit> {
     RecyclerView mAddedValues;
 
     public SMView(final Context context,
-                  final ISMPresenter<Unit> presenter,
+                  final SMPresenter<Unit> presenter,
                   final SMModel<Unit> model) {
         mRootView = LayoutInflater.from(context).inflate(R.layout.single_measurement_view, null);
         ButterKnife.bind(this, mRootView);
