@@ -15,9 +15,10 @@ public class SingleMeasurementActivity extends AppCompatActivity {
 
     public static final String PRESENTER_TYPE_KEY = "SingleMeasurementActivity presenter type key";
 
-    public static Intent createIntent(final Context context, SMInstance presenterType) {
+    public static Intent createIntent(final Context context, SMInstance extra) {
         final Intent intent = new Intent(context, SingleMeasurementActivity.class);
-        intent.putExtra(PRESENTER_TYPE_KEY, presenterType.toString());
+        intent.putExtra(PRESENTER_TYPE_KEY, extra);
+
         return intent;
     }
 
