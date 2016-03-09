@@ -32,7 +32,7 @@ public class SMPresenter<Unit> {
 
     public void updateMeasurementValue(final String newHeight, final Date withDate) {
         if (TextUtils.isEmpty(newHeight)) {
-            mView.notifyError("please specify height");
+            mView.notifyError("Please specify " + measurementTitle());
         } else {
             mModel.addMeasurementValue(mConverter.convert(newHeight), withDate);
         }
