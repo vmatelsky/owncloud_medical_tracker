@@ -26,7 +26,6 @@
             android:id="@+id/edit_measurement"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:hint="@string/weight"
             android:inputType="number" />
 
         <TextView

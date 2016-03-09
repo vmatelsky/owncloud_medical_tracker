@@ -41,7 +41,7 @@ public class SMView<Unit> {
     EditText mMeasurementEditText;
 
     @Bind(R.id.measurement_date)
-    EditText mMeasurementDate;
+    TextView mMeasurementDate;
 
     @Bind(R.id.added_values)
     RecyclerView mAddedValues;
@@ -55,7 +55,8 @@ public class SMView<Unit> {
         mPresenter = presenter;
         mModel = model;
 
-        mMeasurementTitle.setText(presenter.measurementTitle(context));
+        mMeasurementTitle.setText(presenter.measurementTitle());
+        mMeasurementEditText.setHint(presenter.measurementTitle());
         displayDate(model.getMeasurementDate());
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(context));
@@ -71,13 +72,13 @@ public class SMView<Unit> {
         mAdapter.notifyDataSetChanged();
     }
 
-    @OnClick(R.id.add_height)
+    @OnClick(R.id.add_measurement)
     void onAddMeasurementItem(final View view) {
         final String measurementString = mMeasurementEditText.getText().toString().trim();
         mPresenter.updateMeasurementValue(measurementString, mModel.getMeasurementDate());
     }
 
-    @OnClick(R.id.height_measure_date)
+    @OnClick(R.id.measurement_date)
     void onMeasurementDateClicked(final View view) {
         selectDate((datePicker, year, monthOfYear, dayOfMonth) -> {
             final Date measurementDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();

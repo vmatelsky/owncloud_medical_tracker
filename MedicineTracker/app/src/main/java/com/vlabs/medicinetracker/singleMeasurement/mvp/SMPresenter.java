@@ -4,8 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.vlabs.medicinetracker.R;
-
 import java.util.Date;
 
 /**
@@ -16,17 +14,20 @@ public class SMPresenter<Unit> {
     private final SMModel<Unit> mModel;
     private final SMView<Unit> mView;
     private final Converter<String, Unit> mConverter;
+    private final String mTitle;
 
     public SMPresenter(
             final Converter<String, Unit> converter,
+            final String title,
             final Context context) {
         mConverter = converter;
+        mTitle = title;
         mModel = new SMModel<>();
         mView = new SMView<>(context, this, mModel);
     }
 
-    public String measurementTitle(final Context context) {
-        return context.getResources().getString(R.string.height);
+    public String measurementTitle() {
+        return mTitle;
     }
 
     public void updateMeasurementValue(final String newHeight, final Date withDate) {

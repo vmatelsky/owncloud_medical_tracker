@@ -1,6 +1,5 @@
 package com.vlabs.medicinetracker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -33,6 +32,6 @@ public class MainActivity extends AppCompatActivity implements SectionsAdapter.S
 
     @Override
     public void onSectionItemClicked(final SectionItem item) {
-        startActivity(new Intent(this, item.getHandleActivityClass()));
+        startActivity(item.getIntentFactory().createIntent(this));
     }
 }

@@ -17,7 +17,7 @@ public class SingleMeasurementActivity extends AppCompatActivity {
 
     public static Intent createIntent(final Context context, SMInstance extra) {
         final Intent intent = new Intent(context, SingleMeasurementActivity.class);
-        intent.putExtra(PRESENTER_TYPE_KEY, extra);
+        intent.putExtra(PRESENTER_TYPE_KEY, extra.toString());
 
         return intent;
     }
