@@ -1,39 +1,48 @@
 package com.vlabs.medicinetracker.singleMeasurement.mvp;
 
-import android.util.Pair;
+import com.jakewharton.rxrelay.BehaviorRelay;
+import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by vlad on 3/8/16.
  */
 public class SMModel<Unit> {
 
-    private final List<Pair<Unit, Date>> mAddedValues = new ArrayList<>();
+    private Date mLastGeneratedDate = currentDate();
+    private final BehaviorRelay<Date> mDateUpdated = BehaviorRelay.create();
+    private final BehaviorRelay<MeasurementItem<Unit>> mAddedMeasurementsUpdated = BehaviorRelay.create();
 
-    private Date mMeasurementDate = currentDate();
-
-    public void addMeasurementValue(final Unit newValue, final Date withDate) {
-        mAddedValues.add(Pair.create(newValue, withDate));
-        // TODO: notify data change
+    public SMModel() {
+        mDateUpdated.call(mLastGeneratedDate);
     }
 
-    public List<Pair<Unit, Date>> getValues() {
-        return mAddedValues;
+    public void addMeasurementValue(final Unit newValue, final Date withDate) {
+        final MeasurementItem<Unit> item = new MeasurementItem<>(newValue, withDate);
+        mAddedMeasurementsUpdated.call(item);
+    }
+
+    public Observable<MeasurementItem<Unit>> addedMeasurementItems() {
+        return mAddedMeasurementsUpdated;
+    }
+
+    public void setMeasurementDate(final Date measurementDate) {
+        mLastGeneratedDate = measurementDate;
+        mDateUpdated.call(mLastGeneratedDate);
+    }
+
+    public Observable<Date> onDate() {
+        return mDateUpdated;
+    }
+
+    public Date getLastGeneratedDate() {
+        return mLastGeneratedDate;
     }
 
     private Date currentDate() {
         return new Date();
-    }
-
-    public void setMeasurementDate(final Date measurementDate) {
-        mMeasurementDate = measurementDate;
-        // TODO: display updated data
-    }
-
-    public Date getMeasurementDate() {
-        return mMeasurementDate;
     }
 }

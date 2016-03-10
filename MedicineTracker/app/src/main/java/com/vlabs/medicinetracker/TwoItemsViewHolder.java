@@ -8,7 +8,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PairViewHolder<F, S> extends ViewHolder {
+public class TwoItemsViewHolder<F, S> extends ViewHolder {
 
     @Bind(R.id.first)
     TextView mFirst;
@@ -16,13 +16,13 @@ public class PairViewHolder<F, S> extends ViewHolder {
     @Bind(R.id.second)
     TextView mSecond;
 
-    public PairViewHolder(final View itemView) {
+    public TwoItemsViewHolder(final View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }
 
-    public void bind(Pair<F, S> pair) {
-        mFirst.setText(pair.first.toString());
-        mSecond.setText(pair.second.toString());
+    public void bind(F first, S second) {
+        mFirst.setText(first.toString());
+        mSecond.setText(second.toString());
     }
 }

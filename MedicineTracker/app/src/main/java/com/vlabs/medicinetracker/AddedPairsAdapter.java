@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class AddedPairsAdapter<F, S> extends RecyclerView.Adapter<PairViewHolder<F, S>> {
+public class AddedPairsAdapter<F, S> extends RecyclerView.Adapter<TwoItemsViewHolder<F, S>> {
 
     private final List<Pair<F, S>> mData;
 
@@ -17,13 +17,14 @@ public class AddedPairsAdapter<F, S> extends RecyclerView.Adapter<PairViewHolder
     }
 
     @Override
-    public PairViewHolder<F, S> onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public TwoItemsViewHolder<F, S> onCreateViewHolder(final ViewGroup parent, final int viewType) {
         final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pair_item_layout, parent, false);
-        return new PairViewHolder<>(itemView);
+        return new TwoItemsViewHolder<>(itemView);
     }
     @Override
-    public void onBindViewHolder(final PairViewHolder<F, S> holder, final int position) {
-        holder.bind(mData.get(position));
+    public void onBindViewHolder(final TwoItemsViewHolder<F, S> holder, final int position) {
+        final Pair<F, S> pair = mData.get(position);
+        holder.bind(pair.first, pair.second);
     }
 
     @Override

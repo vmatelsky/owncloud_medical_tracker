@@ -16,4 +16,9 @@ public class Weight {
     public Kilogram getInKilo() {
         return mInKilo;
     }
+
+    @Override
+    public String toString() {
+        return mInKilo.toString();
+    }
 }

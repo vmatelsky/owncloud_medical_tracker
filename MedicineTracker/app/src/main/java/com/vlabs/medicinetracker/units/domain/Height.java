@@ -16,4 +16,9 @@ public class Height {
     public Centimeter getInCentimeters() {
         return mInCentimeters;
     }
+
+    @Override
+    public String toString() {
+        return mInCentimeters.toString();
+    }
 }

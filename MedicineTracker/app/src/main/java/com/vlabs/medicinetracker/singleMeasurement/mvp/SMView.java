@@ -10,13 +10,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.vlabs.medicinetracker.AddedPairsAdapter;
+import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
+import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,7 +33,6 @@ public class SMView<Unit> {
     public static final String DATE_PATTERN = "dd/MM/yyyy";
 
     private final View mRootView;
-    private final AddedPairsAdapter<Unit, Date> mAdapter;
     private final SMPresenter<Unit> mPresenter;
     private final SMModel<Unit> mModel;
 
@@ -46,6 +48,8 @@ public class SMView<Unit> {
     @Bind(R.id.added_values)
     RecyclerView mAddedValues;
 
+    private final List<MeasurementItem<Unit>> mGeneratedItems = new ArrayList<>();
+
     public SMView(final Context context,
                   final SMPresenter<Unit> presenter,
                   final SMModel<Unit> model) {
@@ -57,25 +61,27 @@ public class SMView<Unit> {
 
         mMeasurementTitle.setText(presenter.measurementTitle());
         mMeasurementEditText.setHint(presenter.measurementTitle());
-        displayDate(model.getMeasurementDate());
+
+        model.onDate().subscribe(this::displayDate);
+        model.addedMeasurementItems().subscribe(this::handleNewMeasurementItem);
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(context));
-        mAdapter = new AddedPairsAdapter<>(model.getValues());
-        mAddedValues.setAdapter(mAdapter);
+        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mGeneratedItems));
+    }
+
+    private void handleNewMeasurementItem(final MeasurementItem<Unit> unitMeasurementItem) {
+        mGeneratedItems.add(unitMeasurementItem);
+        mAddedValues.getAdapter().notifyDataSetChanged();
     }
 
     public void notifyError(final String errorMessage) {
         Snackbar.make(mRootView, errorMessage, Snackbar.LENGTH_LONG).show();
     }
 
-    public void notifyDataChanged() {
-        mAdapter.notifyDataSetChanged();
-    }
-
     @OnClick(R.id.add_measurement)
     void onAddMeasurementItem(final View view) {
         final String measurementString = mMeasurementEditText.getText().toString().trim();
-        mPresenter.updateMeasurementValue(measurementString, mModel.getMeasurementDate());
+        mPresenter.updateMeasurementValue(measurementString, mModel.getLastGeneratedDate());
     }
 
     @OnClick(R.id.measurement_date)
