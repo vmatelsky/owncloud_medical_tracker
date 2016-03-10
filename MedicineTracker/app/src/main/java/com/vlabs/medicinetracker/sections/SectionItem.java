@@ -3,7 +3,8 @@ package com.vlabs.medicinetracker.sections;
 import android.content.Intent;
 
 import com.vlabs.medicinetracker.BloodPressureActivity;
-import com.vlabs.medicinetracker.HeightActivity;
+import com.vlabs.medicinetracker.GlucoseLevelActivity;
+import com.vlabs.medicinetracker.MedicalReminderActivity;
 import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.singleMeasurement.SingleMeasurementActivity;
 import com.vlabs.medicinetracker.singleMeasurement.mvp.SMInstance;
@@ -16,7 +17,8 @@ public enum SectionItem {
     HEIGHT(R.string.height, context -> SingleMeasurementActivity.createIntent(context, SMInstance.Height)),
     WEIGHT(R.string.weight, context -> SingleMeasurementActivity.createIntent(context, SMInstance.Weight)),
     PRESSURE(R.string.blood_pressure, context -> new Intent(context, BloodPressureActivity.class)),
-    MEDICAL_REMINDER(R.string.medicine_reminder, context -> new Intent(context, HeightActivity.class));
+    GLUCOSE_LEVEL(R.string.glucose_level, context -> new Intent(context, GlucoseLevelActivity.class)),
+    MEDICAL_REMINDER(R.string.medicine_reminder, context -> new Intent(context, MedicalReminderActivity.class));
 
     private final int mTitleId;
     private final IntentFactory mIntentFactory;

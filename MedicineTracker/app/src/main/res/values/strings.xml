@@ -12,4 +12,6 @@
     <string name="blood_pressure">Blood pressure</string>
     <string name="systolic">Systolic</string>
     <string name="diastolic">Diastolic</string>
+    <string name="glucose_level">Glucose level</string>
+    <string name="under_development">The screen is under development</string>
 </resources>
