@@ -7,6 +7,8 @@ import java.util.Date;
 
 import rx.Observable;
 
+import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
+
 /**
  * Created by vlad on 3/8/16.
  */
@@ -40,9 +42,5 @@ public class SMModel<Unit> {
 
     public Date getLastGeneratedDate() {
         return mLastGeneratedDate;
-    }
-
-    private Date currentDate() {
-        return new Date();
     }
 }

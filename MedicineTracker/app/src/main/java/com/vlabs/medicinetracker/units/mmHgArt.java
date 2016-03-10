@@ -7,6 +7,10 @@ public class mmHgArt {
 
     private final int mValue;
 
+    public mmHgArt(final String value) {
+        this(Integer.valueOf(value));
+    }
+
     public mmHgArt(final int value) {
         mValue = value;
     }
@@ -15,4 +19,8 @@ public class mmHgArt {
         return mValue;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(mValue);
+    }
 }

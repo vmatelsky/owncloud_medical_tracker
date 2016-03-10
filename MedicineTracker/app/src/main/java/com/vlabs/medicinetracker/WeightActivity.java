@@ -26,9 +26,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WeightActivity extends AppCompatActivity {
+import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
+import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
 
-    public static final String DATE_PATTERN = "dd/MM/yyyy";
+public class WeightActivity extends AppCompatActivity {
 
     @Bind(R.id.edit_weight)
     EditText mEditWeight;
@@ -50,7 +51,7 @@ public class WeightActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mWeightMeasureDateTextView.setText(formatDate(mWeightMeasureDate));
+        mWeightMeasureDateTextView.setText(formattedDate(mWeightMeasureDate));
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(this));
         mAddedValues.setAdapter(new AddedPairsAdapter<>(mAddedWeights));
@@ -74,7 +75,7 @@ public class WeightActivity extends AppCompatActivity {
     void onWeightMeasureDateClicked(final View view) {
         selectDate((datePicker, year, monthOfYear, dayOfMonth) -> {
             mWeightMeasureDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
-            mWeightMeasureDateTextView.setText(formatDate(mWeightMeasureDate));
+            mWeightMeasureDateTextView.setText(formattedDate(mWeightMeasureDate));
         });
     }
 
@@ -85,15 +86,6 @@ public class WeightActivity extends AppCompatActivity {
         final int day = c.get(Calendar.DAY_OF_MONTH);
 
         new DatePickerDialog(this, listener, year, month, day).show();
-    }
-
-    private Date currentDate() {
-        return new Date();
-    }
-
-    private String formatDate(final Date date) {
-        final SimpleDateFormat df = new SimpleDateFormat(DATE_PATTERN);
-        return df.format(date);
     }
 
 }

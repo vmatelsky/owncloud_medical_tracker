@@ -7,7 +7,9 @@
     <string name="edit">edit</string>
     <string name="add">Add</string>
     <string name="height">Height</string>
-    <string name="measure_date">Measure date</string>
+    <string name="measurement_date">Measurement date</string>
     <string name="pressure">Pressure</string>
     <string name="blood_pressure">Blood pressure</string>
+    <string name="systolic">Systolic</string>
+    <string name="diastolic">Diastolic</string>
 </resources>

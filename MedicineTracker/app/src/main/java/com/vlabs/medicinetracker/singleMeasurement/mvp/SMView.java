@@ -14,7 +14,6 @@ import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,12 +24,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
+
 /**
  * Created by vlad on 3/8/16.
  */
 public class SMView<Unit> {
-
-    public static final String DATE_PATTERN = "dd/MM/yyyy";
 
     private final View mRootView;
     private final SMPresenter<Unit> mPresenter;
@@ -102,12 +101,7 @@ public class SMView<Unit> {
     }
 
     public void displayDate(final Date measurementDate) {
-        mMeasurementDate.setText(formatDate(measurementDate));
-    }
-
-    private String formatDate(final Date date) {
-        final SimpleDateFormat df = new SimpleDateFormat(DATE_PATTERN);
-        return df.format(date);
+        mMeasurementDate.setText(formattedDate(measurementDate));
     }
 
     public View rootView() {
