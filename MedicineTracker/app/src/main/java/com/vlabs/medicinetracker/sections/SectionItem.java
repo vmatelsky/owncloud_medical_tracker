@@ -3,7 +3,7 @@ package com.vlabs.medicinetracker.sections;
 import android.content.Intent;
 
 import com.vlabs.medicinetracker.BloodPressureActivity;
-import com.vlabs.medicinetracker.GlucoseLevelActivity;
+import com.vlabs.medicinetracker.glucose.GlucoseLevelActivity;
 import com.vlabs.medicinetracker.MedicalReminderActivity;
 import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.singleMeasurement.SingleMeasurementActivity;

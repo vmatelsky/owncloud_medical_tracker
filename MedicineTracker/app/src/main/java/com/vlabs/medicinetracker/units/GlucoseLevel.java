@@ -7,6 +7,10 @@ public class GlucoseLevel {
 
     private final Double mValue;
 
+    public GlucoseLevel(final String value) {
+        this(Double.valueOf(value));
+    }
+
     public GlucoseLevel(final Double value) {
         mValue = value;
     }
