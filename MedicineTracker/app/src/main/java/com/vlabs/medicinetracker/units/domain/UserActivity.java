@@ -17,6 +17,6 @@ public class UserActivity {
 
     @Override
     public String toString() {
-        return "user activity: " + mName;
+        return mName;
     }
 }

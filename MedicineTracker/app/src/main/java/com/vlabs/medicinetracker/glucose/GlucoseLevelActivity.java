@@ -57,15 +57,13 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.glucose_level_layout);
         ButterKnife.bind(this);
+        mAddedValues.setLayoutManager(new LinearLayoutManager(this));;
 
         mPresenter = new GlucoseLevelPresenter(this, this);
         mPresenter.onCreate(savedInstanceState);
-
-        mAddedValues.setLayoutManager(new LinearLayoutManager(this));;
-        mAddedValues.setAdapter(new MeasurementItemAdapter<>(new ArrayList<MeasurementItem<GlucoseLevelMeasurement>>()));
     }
 
-    @OnClick(R.id.measurement_date)
+    @OnClick(R.id.measurement_time)
     void onMeasureTime(final View view) {
         selectTime(this, (timePicker, hourOfDay, minute) -> mPresenter.onMeasureTimeChanged(hourOfDay, minute));
     }
