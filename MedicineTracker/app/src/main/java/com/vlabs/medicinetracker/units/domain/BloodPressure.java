@@ -1,6 +1,6 @@
 package com.vlabs.medicinetracker.units.domain;
 
-import com.vlabs.medicinetracker.units.mmHgArt;
+import com.vlabs.medicinetracker.units.metric.mmHgArt;
 
 /**
  * Created by vlad on 3/10/16.

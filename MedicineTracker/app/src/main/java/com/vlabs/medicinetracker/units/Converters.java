@@ -5,6 +5,7 @@ import com.vlabs.medicinetracker.units.domain.Height;
 import com.vlabs.medicinetracker.units.domain.Weight;
 import com.vlabs.medicinetracker.units.metric.Centimeter;
 import com.vlabs.medicinetracker.units.metric.Kilogram;
+import com.vlabs.medicinetracker.units.metric.mmHgArt;
 
 /**
  * Created by vlad on 3/8/16.

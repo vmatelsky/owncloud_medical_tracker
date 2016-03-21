@@ -13,11 +13,10 @@ import android.widget.TextView;
 
 import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
+import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.domain.UserActivity;
-import com.vlabs.medicinetracker.units.measurements.GlucoseLevelMeasurement;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -25,6 +24,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.selectDate;
@@ -57,7 +57,8 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.glucose_level_layout);
         ButterKnife.bind(this);
-        mAddedValues.setLayoutManager(new LinearLayoutManager(this));;
+        mAddedValues.setLayoutManager(new LinearLayoutManager(this));
+        mAddedValues.setHasFixedSize(true);
 
         mPresenter = new GlucoseLevelPresenter(this, this);
         mPresenter.onCreate(savedInstanceState);
@@ -65,14 +66,12 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
 
     @OnClick(R.id.measurement_time)
     void onMeasureTime(final View view) {
-        selectTime(this, (timePicker, hourOfDay, minute) -> mPresenter.onMeasureTimeChanged(hourOfDay, minute));
+        mPresenter.onMeasureTimeClicked();
     }
 
     @OnClick(R.id.measurement_date)
     void onMeasureDateClicked(final View view) {
-        selectDate(this, (datePicker, year, monthOfYear, dayOfMonth) -> {
-            mPresenter.onMeasureDateChanged(new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime());
-        });
+        mPresenter.onSelectDateClicked();
     }
 
     @OnClick(R.id.add)
@@ -107,7 +106,17 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
     }
 
     @Override
-    public void updateMeasurementItemsList(final List<MeasurementItem<GlucoseLevelMeasurement>> generatedItems) {
+    public void updateMeasurementItemsList(final List<MeasurementItem<GlucoseLevel>> generatedItems) {
         mAddedValues.setAdapter(new MeasurementItemAdapter<>(generatedItems));
+    }
+
+    @Override
+    public void showSelectTimeDialog() {
+        selectTime(this, (timePicker, hourOfDay, minute) -> mPresenter.onMeasureTimeChanged(hourOfDay, minute));
+    }
+
+    @Override
+    public void showSelectDateDialog() {
+        selectDate(this, (datePicker, year, monthOfYear, dayOfMonth) -> mPresenter.onMeasureDateChanged(new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime()));
     }
 }

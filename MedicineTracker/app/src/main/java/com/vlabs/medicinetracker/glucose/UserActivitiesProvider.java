@@ -16,9 +16,11 @@ public class UserActivitiesProvider {
     private final List<UserActivity> mActivitiesList = new ArrayList<>();
 
     public UserActivitiesProvider(final Context context) {
+        mActivitiesList.add(new UserActivity(context.getString(R.string.before_breakfast)));
+        mActivitiesList.add(new UserActivity(context.getString(R.string.before_lunch)));
+        mActivitiesList.add(new UserActivity(context.getString(R.string.hour_after_meal)));
+        mActivitiesList.add(new UserActivity(context.getString(R.string.two_hours_after_meal)));
         mActivitiesList.add(new UserActivity(context.getString(R.string.after_sport)));
-        mActivitiesList.add(new UserActivity(context.getString(R.string.in_the_morning)));
-        mActivitiesList.add(new UserActivity(context.getString(R.string.before_going_to_bed)));
     }
 
     public List<UserActivity> getUserActivities() {

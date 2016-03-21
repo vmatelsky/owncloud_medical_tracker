@@ -14,7 +14,10 @@
     <string name="diastolic">Diastolic</string>
     <string name="glucose_level">Glucose level</string>
     <string name="under_development">The screen is under development</string>
+
+    <string name="before_breakfast">Before breakfast</string>
+    <string name="before_lunch">Before lunch</string>
+    <string name="hour_after_meal">Hour after meal</string>
+    <string name="two_hours_after_meal">Two hours after meal</string>
     <string name="after_sport">After Sport</string>
-    <string name="in_the_morning">In the morning</string>
-    <string name="before_going_to_bed">Before going to bed</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.vlabs.medicinetracker.units;
+package com.vlabs.medicinetracker.units.metric;
 
 /**
  * Created by vlad on 3/4/16.

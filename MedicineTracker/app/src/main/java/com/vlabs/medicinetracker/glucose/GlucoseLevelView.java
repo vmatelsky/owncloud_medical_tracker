@@ -1,8 +1,8 @@
 package com.vlabs.medicinetracker.glucose;
 
+import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.domain.UserActivity;
-import com.vlabs.medicinetracker.units.measurements.GlucoseLevelMeasurement;
 
 import java.util.Date;
 import java.util.List;
@@ -19,7 +19,11 @@ public interface GlucoseLevelView {
 
     void showNotification(String notification);
 
-    void updateMeasurementItemsList(List<MeasurementItem<GlucoseLevelMeasurement>> generatedItems);
+    void updateMeasurementItemsList(List<MeasurementItem<GlucoseLevel>> generatedItems);
 
     void onMeasurementItemsChanged();
+
+    void showSelectTimeDialog();
+
+    void showSelectDateDialog();
 }

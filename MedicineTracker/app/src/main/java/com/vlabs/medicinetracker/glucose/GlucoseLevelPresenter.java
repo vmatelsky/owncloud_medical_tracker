@@ -3,14 +3,15 @@ package com.vlabs.medicinetracker.glucose;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.vlabs.medicinetracker.units.GlucoseLevel;
+import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.domain.UserActivity;
-import com.vlabs.medicinetracker.units.measurements.GlucoseLevelMeasurement;
+import com.vlabs.medicinetracker.units.metric.mmol_L;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
 
@@ -21,7 +22,7 @@ public class GlucoseLevelPresenter {
 
     private final GlucoseLevelView mView;
     private final UserActivitiesProvider mUserActivitiesProvider;
-    private List<MeasurementItem<GlucoseLevelMeasurement>> mGeneratedItems = new ArrayList<>();
+    private List<MeasurementItem<GlucoseLevel>> mGeneratedItems = new ArrayList<>();
 
     private Date mMeasurementDate = currentDate();
     private int mHourOfDay;
@@ -63,18 +64,26 @@ public class GlucoseLevelPresenter {
 
     public void onAddMeasurementValueClicked(final String glucoseLevelValue, final int spinnerIndex) {
         try {
-            final GlucoseLevel glucoseLevel = new GlucoseLevel(glucoseLevelValue);
+            final mmol_L mmol_l = new mmol_L(glucoseLevelValue);
             final UserActivity userActivity = mUserActivitiesProvider.getUserActivities().get(spinnerIndex);
             final Date measurementDate = mMeasurementDate;
             measurementDate.setHours(mHourOfDay);
             measurementDate.setMinutes(mMinutes);
 
-            final GlucoseLevelMeasurement measurement = new GlucoseLevelMeasurement(glucoseLevel, userActivity);
-            final MeasurementItem<GlucoseLevelMeasurement> item = new MeasurementItem<>(measurement, measurementDate);
+            final GlucoseLevel measurement = new GlucoseLevel(mmol_l, userActivity);
+            final MeasurementItem<GlucoseLevel> item = new MeasurementItem<>(measurement, measurementDate);
             mGeneratedItems.add(item);
             mView.onMeasurementItemsChanged();
         } catch (NumberFormatException ex) {
             mView.showNotification(ex.toString());
         }
+    }
+
+    public void onMeasureTimeClicked() {
+        mView.showSelectTimeDialog();
+    }
+
+    public void onSelectDateClicked() {
+        mView.showSelectDateDialog();
     }
 }

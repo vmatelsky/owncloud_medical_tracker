@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
-import com.vlabs.medicinetracker.units.mmHgArt;
+import com.vlabs.medicinetracker.units.metric.mmHgArt;
 
 import java.util.ArrayList;
 import java.util.Date;
