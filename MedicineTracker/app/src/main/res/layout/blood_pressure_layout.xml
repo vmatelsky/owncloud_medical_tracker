@@ -11,54 +11,60 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BloodPressureActivity">
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/systolic" />
+            android:text="@string/systolic"/>
 
         <EditText
             android:id="@+id/systolic"
+            style="@style/input_field_style"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"/>
 
     </LinearLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/diastolic" />
+            android:text="@string/diastolic"/>
 
         <EditText
             android:id="@+id/diastolic"
+            style="@style/input_field_style"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"/>
 
     </LinearLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/measurement_date" />
+            android:text="@string/measurement_date"/>
 
         <TextView
             android:id="@+id/measurement_date"
+            style="@style/time_field_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"/>
 
     </LinearLayout>
 
@@ -66,12 +72,12 @@
         android:id="@+id/add_blood_pressure_measurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add" />
+        android:text="@string/add"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/added_values"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
 </LinearLayout>

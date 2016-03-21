@@ -25,7 +25,7 @@ public class GlucoseLevel {
 
     @Override
     public String toString() {
-        return mGlucoseLevel + " after " + mUserActivity;
+        return mGlucoseLevel + " " + mUserActivity;
     }
 
 }
