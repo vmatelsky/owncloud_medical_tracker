@@ -13,9 +13,9 @@ import java.util.List;
 public interface GlucoseLevelView {
     void showUserActivities(List<UserActivity> userActivities);
 
-    void updateMeasurementDate(Date measurementTime);
+    void updateMeasurementDate(Date measurementDate);
 
-    void updateMeasurementTime(int hourOfDay, int minutes);
+    void updateMeasurementTime(Date measurementTime);
 
     void showNotification(String notification);
 
@@ -26,4 +26,5 @@ public interface GlucoseLevelView {
     void showSelectTimeDialog();
 
     void showSelectDateDialog();
+
 }

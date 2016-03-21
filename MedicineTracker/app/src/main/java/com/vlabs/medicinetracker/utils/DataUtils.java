@@ -15,7 +15,7 @@ import java.util.Date;
 public class DataUtils {
 
     public static final String DATE_PATTERN = "dd/MM/yyyy";
-    public static final String TIME_PATTERN = "hh:mm dd/MM/yyyy";
+    public static final String TIME_PATTERN = "hh:mm";
 
     public static Date currentDate() {
         return new Date();

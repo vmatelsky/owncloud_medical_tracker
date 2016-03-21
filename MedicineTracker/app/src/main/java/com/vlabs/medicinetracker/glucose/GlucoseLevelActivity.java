@@ -27,6 +27,7 @@ import butterknife.OnClick;
 
 
 import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
+import static com.vlabs.medicinetracker.utils.DataUtils.formattedTime;
 import static com.vlabs.medicinetracker.utils.DataUtils.selectDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.selectTime;
 
@@ -85,14 +86,13 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
     }
 
     @Override
-    public void updateMeasurementDate(final Date measurementTime) {
-        mMeasurementDate.setText(formattedDate(measurementTime));
+    public void updateMeasurementDate(final Date measurementDate) {
+        mMeasurementDate.setText(formattedDate(measurementDate));
     }
 
     @Override
-    public void updateMeasurementTime(final int hourOfDay, final int minutes) {
-        final String content = hourOfDay + " : " + minutes;
-        mMeasurementTime.setText(content);
+    public void updateMeasurementTime(final Date measurementTime) {
+        mMeasurementTime.setText(formattedTime(measurementTime));
     }
 
     @Override

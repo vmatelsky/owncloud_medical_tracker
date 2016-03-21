@@ -25,26 +25,22 @@ public class GlucoseLevelPresenter {
     private List<MeasurementItem<GlucoseLevel>> mGeneratedItems = new ArrayList<>();
 
     private Date mMeasurementDate = currentDate();
-    private int mHourOfDay;
-    private int mMinutes;
 
     public GlucoseLevelPresenter(Context context, GlucoseLevelView view) {
         mView = view;
         mUserActivitiesProvider = new UserActivitiesProvider(context); // TODO: inject dependency
 
-        mHourOfDay = mMeasurementDate.getHours();
-        mMinutes = mMeasurementDate.getMinutes();
     }
 
     public void onCreate(final Bundle savedInstanceState) {
         mView.showUserActivities(mUserActivitiesProvider.getUserActivities());
         mView.updateMeasurementItemsList(mGeneratedItems);
         triggerMeasurementDateUpdate();
-        triggerMeasurementTimeUpdate(mHourOfDay, mMinutes);
+        triggerMeasurementTimeUpdate();
     }
 
-    private void triggerMeasurementTimeUpdate(final int hourOfDay, final int minutes) {
-        mView.updateMeasurementTime(hourOfDay, minutes);
+    private void triggerMeasurementTimeUpdate() {
+        mView.updateMeasurementTime(mMeasurementDate);
     }
 
     public void onMeasureDateChanged(final Date time) {
@@ -53,9 +49,9 @@ public class GlucoseLevelPresenter {
     }
 
     public void onMeasureTimeChanged(final int hourOfDay, final int minutes) {
-        mHourOfDay = hourOfDay;
-        mMinutes = minutes;
-        triggerMeasurementTimeUpdate(hourOfDay, minutes);
+        mMeasurementDate.setHours(hourOfDay);
+        mMeasurementDate.setMinutes(minutes);
+        triggerMeasurementTimeUpdate();
     }
 
     private void triggerMeasurementDateUpdate() {
@@ -66,12 +62,9 @@ public class GlucoseLevelPresenter {
         try {
             final mmol_L mmol_l = new mmol_L(glucoseLevelValue);
             final UserActivity userActivity = mUserActivitiesProvider.getUserActivities().get(spinnerIndex);
-            final Date measurementDate = mMeasurementDate;
-            measurementDate.setHours(mHourOfDay);
-            measurementDate.setMinutes(mMinutes);
-
             final GlucoseLevel measurement = new GlucoseLevel(mmol_l, userActivity);
-            final MeasurementItem<GlucoseLevel> item = new MeasurementItem<>(measurement, measurementDate);
+            final MeasurementItem<GlucoseLevel> item = new MeasurementItem<>(measurement, mMeasurementDate);
+
             mGeneratedItems.add(item);
             mView.onMeasurementItemsChanged();
         } catch (NumberFormatException ex) {
