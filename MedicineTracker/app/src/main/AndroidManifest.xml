@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".BloodPressureActivity"
+            android:name=".blood_pressure.BloodPressureActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

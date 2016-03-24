@@ -10,5 +10,5 @@ public class TrackerDB {
 
     public static final String NAME = "trackerdb";
 
-    public static final int VERSION = 2;
+    public static final int VERSION = 3;
 }

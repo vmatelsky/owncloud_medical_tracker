@@ -6,6 +6,7 @@ import com.vlabs.medicinetracker.units.metric.mmHgArt;
 /**
  * Created by vlad on 3/24/16.
  */
+@com.raizlabs.android.dbflow.annotation.TypeConverter
 public class mmHgArtConverter extends TypeConverter<Integer, mmHgArt> {
 
     @Override

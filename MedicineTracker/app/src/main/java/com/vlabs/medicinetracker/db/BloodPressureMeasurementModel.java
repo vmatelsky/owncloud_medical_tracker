@@ -1,10 +1,11 @@
 package com.vlabs.medicinetracker.db;
 
+import com.raizlabs.android.dbflow.sql.language.Delete;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,23 +13,19 @@ import java.util.List;
  */
 public class BloodPressureMeasurementModel {
 
-    public List<MeasurementItem<BloodPressure>> loadAll() {
-        final List<BloodPressureTable> queryTable = new Select().from(BloodPressureTable.class).queryList();
-
-        final List<MeasurementItem<BloodPressure>> result = new ArrayList<>();
-
-        for (BloodPressureTable item : queryTable) {
-            final BloodPressure bloodPressure = new BloodPressure(item.systolic, item.diastolic);
-            result.add(new MeasurementItem<>(bloodPressure, item.measureDate));
-        }
-        return result;
+    public List<BloodPressureMeasurement> loadAll() {
+        return new Select().from(BloodPressureMeasurement.class).queryList();
     }
 
     public void save(final MeasurementItem<BloodPressure> measurementItem) {
-        final BloodPressureTable table = new BloodPressureTable();
+        final BloodPressureMeasurement table = new BloodPressureMeasurement();
         table.systolic = measurementItem.getUnit().getSystolic();
         table.diastolic = measurementItem.getUnit().getDiastolic();
         table.measureDate = measurementItem.getDate();
         table.save();
+    }
+
+    public void remove(final BloodPressureMeasurement measurement) {
+        new Delete().from(BloodPressureMeasurement.class).where(BloodPressureMeasurement_Table.id.is(measurement.id)).query();
     }
 }

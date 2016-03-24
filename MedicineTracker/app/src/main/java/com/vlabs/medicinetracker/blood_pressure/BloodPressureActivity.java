@@ -1,27 +1,28 @@
-package com.vlabs.medicinetracker;
+package com.vlabs.medicinetracker.blood_pressure;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.db.BloodPressureMeasurementModel;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.metric.mmHgArt;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 
 import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
@@ -53,11 +54,17 @@ public class BloodPressureActivity extends AppCompatActivity {
         setContentView(R.layout.blood_pressure_layout);
 
         ButterKnife.bind(this);
-
         updateMeasurementDateOnView();
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(this));
-        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mModel.loadAll()));
+
+        final BloodPressureAdapter adapter = new BloodPressureAdapter(mModel, mModel.loadAll());
+        mAddedValues.setAdapter(adapter);
+
+
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mAddedValues);
     }
 
     @OnClick(R.id.measurement_date)
@@ -77,7 +84,7 @@ public class BloodPressureActivity extends AppCompatActivity {
             final BloodPressure bloodPressure = new BloodPressure(systolic, diastolic);
             final MeasurementItem<BloodPressure> measurementItem = new MeasurementItem<>(bloodPressure, mWeightMeasureDate);
             mModel.save(measurementItem);
-            mAddedValues.getAdapter().notifyDataSetChanged();
+            mAddedValues.setAdapter(new BloodPressureAdapter(mModel, mModel.loadAll()));
         } catch (NumberFormatException ex) {
             Snackbar.make(view, "Transformation error", Snackbar.LENGTH_LONG).show();
         }
