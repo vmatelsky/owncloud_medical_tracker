@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.vlabs.medicinetracker.db.BloodPressureMeasurementModel;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.metric.mmHgArt;
@@ -44,7 +45,7 @@ public class BloodPressureActivity extends AppCompatActivity {
     RecyclerView mAddedValues;
 
     private Date mWeightMeasureDate = currentDate();
-    private final List<MeasurementItem<BloodPressure>> mGeneratedItems = new ArrayList<>();
+    private final BloodPressureMeasurementModel mModel = new BloodPressureMeasurementModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class BloodPressureActivity extends AppCompatActivity {
         updateMeasurementDateOnView();
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(this));
-        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mGeneratedItems));
+        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mModel.loadAll()));
     }
 
     @OnClick(R.id.measurement_date)
@@ -75,7 +76,7 @@ public class BloodPressureActivity extends AppCompatActivity {
 
             final BloodPressure bloodPressure = new BloodPressure(systolic, diastolic);
             final MeasurementItem<BloodPressure> measurementItem = new MeasurementItem<>(bloodPressure, mWeightMeasureDate);
-            mGeneratedItems.add(measurementItem);
+            mModel.save(measurementItem);
             mAddedValues.getAdapter().notifyDataSetChanged();
         } catch (NumberFormatException ex) {
             Snackbar.make(view, "Transformation error", Snackbar.LENGTH_LONG).show();
