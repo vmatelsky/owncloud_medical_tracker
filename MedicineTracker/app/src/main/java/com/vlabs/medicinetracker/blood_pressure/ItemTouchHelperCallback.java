@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
+import com.vlabs.medicinetracker.blood_pressure.show.BloodPressureAdapter;
+
 /**
  * Created by vlad on 3/24/16.
  */

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
+import com.vlabs.medicinetracker.TwoItemsViewHolder.Listener;
 import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.db.UserActivity;
@@ -107,7 +108,17 @@ public class GlucoseLevelActivity extends AppCompatActivity implements GlucoseLe
 
     @Override
     public void updateMeasurementItemsList(final List<MeasurementItem<GlucoseLevel>> generatedItems) {
-        mAddedValues.setAdapter(new MeasurementItemAdapter<>(generatedItems));
+        mAddedValues.setAdapter(new MeasurementItemAdapter<>(generatedItems, new Listener() { // TODO: implement listener
+            @Override
+            public boolean onLongClick(final int position) {
+                return false;
+            }
+
+            @Override
+            public void onClick(final int position) {
+
+            }
+        }));
     }
 
     @Override

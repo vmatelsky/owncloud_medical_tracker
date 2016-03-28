@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vlabs.medicinetracker.TwoItemsViewHolder.Listener;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
 import java.util.Date;
@@ -16,9 +17,11 @@ import java.util.List;
 public class MeasurementItemAdapter<Unit> extends RecyclerView.Adapter<TwoItemsViewHolder<Unit, Date>> {
 
     private final List<MeasurementItem<Unit>> mData;
+    private final Listener mListener;
 
-    public MeasurementItemAdapter(final List<MeasurementItem<Unit>> data) {
+    public MeasurementItemAdapter(final List<MeasurementItem<Unit>> data, final Listener listener) {
         mData = data;
+        mListener = listener;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class MeasurementItemAdapter<Unit> extends RecyclerView.Adapter<TwoItemsV
     @Override
     public void onBindViewHolder(final TwoItemsViewHolder<Unit, Date> holder, final int position) {
         final MeasurementItem<Unit> item = mData.get(position);
-        holder.bind(item.getUnit(), item.getDate());
+        holder.bind(item.getUnit(), item.getDate(), mListener, position);
     }
 
     @Override

@@ -16,12 +16,13 @@ public class BloodPressureMeasurementModel {
         return new Select().from(BloodPressureMeasurement.class).queryList();
     }
 
-    public void save(final MeasurementItem<BloodPressure> measurementItem) {
+    public BloodPressureMeasurement save(final MeasurementItem<BloodPressure> measurementItem) {
         final BloodPressureMeasurement table = new BloodPressureMeasurement();
         table.systolic = measurementItem.getUnit().getSystolic();
         table.diastolic = measurementItem.getUnit().getDiastolic();
         table.measureDate = measurementItem.getDate();
         table.save();
+        return table;
     }
 
     public void remove(final BloodPressureMeasurement measurement) {

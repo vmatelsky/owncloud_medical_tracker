@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
+import com.vlabs.medicinetracker.TwoItemsViewHolder.Listener;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
 import java.util.ArrayList;
@@ -65,7 +66,17 @@ public class SMView<Unit> {
         model.addedMeasurementItems().subscribe(this::handleNewMeasurementItem);
 
         mAddedValues.setLayoutManager(new LinearLayoutManager(context));
-        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mGeneratedItems));
+        mAddedValues.setAdapter(new MeasurementItemAdapter<>(mGeneratedItems, new Listener() { // TODO: implement listener
+            @Override
+            public boolean onLongClick(final int position) {
+                return true;
+            }
+
+            @Override
+            public void onClick(final int position) {
+
+            }
+        }));
     }
 
     private void handleNewMeasurementItem(final MeasurementItem<Unit> unitMeasurementItem) {
