@@ -74,6 +74,6 @@
         android:id="@+id/add_blood_pressure_measurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add"/>
+        android:text="@string/submit"/>
 
 </LinearLayout>
