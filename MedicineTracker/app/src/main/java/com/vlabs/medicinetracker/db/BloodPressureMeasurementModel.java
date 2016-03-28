@@ -1,7 +1,6 @@
 package com.vlabs.medicinetracker.db;
 
 import com.raizlabs.android.dbflow.sql.language.Delete;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.sql.language.Select;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;

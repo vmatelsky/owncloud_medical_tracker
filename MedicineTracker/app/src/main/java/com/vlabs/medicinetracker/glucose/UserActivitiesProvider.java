@@ -3,7 +3,7 @@ package com.vlabs.medicinetracker.glucose;
 import android.content.Context;
 
 import com.vlabs.medicinetracker.R;
-import com.vlabs.medicinetracker.units.domain.UserActivity;
+import com.vlabs.medicinetracker.db.UserActivity;
 
 import java.util.ArrayList;
 import java.util.List;

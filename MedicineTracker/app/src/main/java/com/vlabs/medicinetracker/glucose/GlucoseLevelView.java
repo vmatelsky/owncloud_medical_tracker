@@ -2,7 +2,7 @@ package com.vlabs.medicinetracker.glucose;
 
 import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
-import com.vlabs.medicinetracker.units.domain.UserActivity;
+import com.vlabs.medicinetracker.db.UserActivity;
 
 import java.util.Date;
 import java.util.List;

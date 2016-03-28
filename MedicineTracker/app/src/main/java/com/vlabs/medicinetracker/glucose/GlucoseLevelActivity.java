@@ -15,7 +15,7 @@ import com.vlabs.medicinetracker.MeasurementItemAdapter;
 import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.units.domain.GlucoseLevel;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
-import com.vlabs.medicinetracker.units.domain.UserActivity;
+import com.vlabs.medicinetracker.db.UserActivity;
 
 import java.util.Date;
 import java.util.GregorianCalendar;

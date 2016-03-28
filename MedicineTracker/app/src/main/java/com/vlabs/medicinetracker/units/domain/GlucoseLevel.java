@@ -1,5 +1,6 @@
 package com.vlabs.medicinetracker.units.domain;
 
+import com.vlabs.medicinetracker.db.UserActivity;
 import com.vlabs.medicinetracker.units.metric.mmol_L;
 
 /**
