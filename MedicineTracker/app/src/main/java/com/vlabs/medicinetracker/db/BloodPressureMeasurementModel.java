@@ -28,4 +28,12 @@ public class BloodPressureMeasurementModel {
     public void remove(final BloodPressureMeasurement measurement) {
         new Delete().from(BloodPressureMeasurement.class).where(BloodPressureMeasurement_Table.id.is(measurement.id)).query();
     }
+
+    public BloodPressureMeasurement update(final BloodPressureMeasurement originalItem, final MeasurementItem<BloodPressure> updates) {
+        originalItem.systolic = updates.getUnit().getSystolic();
+        originalItem.diastolic = updates.getUnit().getDiastolic();
+        originalItem.measureDate = updates.getDate();
+        originalItem.update();
+        return originalItem;
+    }
 }

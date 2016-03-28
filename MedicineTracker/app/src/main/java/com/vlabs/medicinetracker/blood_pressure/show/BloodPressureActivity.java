@@ -10,7 +10,7 @@ import android.view.View;
 
 import com.vlabs.medicinetracker.R;
 import com.vlabs.medicinetracker.blood_pressure.BloodPressureAddDialog;
-import com.vlabs.medicinetracker.blood_pressure.BloodPressureAddDialog.Listener;
+import com.vlabs.medicinetracker.blood_pressure.BloodPressureEditDialog;
 import com.vlabs.medicinetracker.blood_pressure.ItemTouchHelperCallback;
 import com.vlabs.medicinetracker.db.BloodPressureMeasurement;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
@@ -24,7 +24,10 @@ import butterknife.OnClick;
  * Created by vlad on 3/10/16.
  */
 public class BloodPressureActivity extends AppCompatActivity
-        implements Listener, BloodPressureView {
+        implements
+        BloodPressureAddDialog.Listener,
+        BloodPressureEditDialog.Listener,
+        BloodPressureView {
 
     @Bind(R.id.added_values)
     RecyclerView mAddedValues;
@@ -50,8 +53,8 @@ public class BloodPressureActivity extends AppCompatActivity
     }
 
     @Override
-    public void onConfirmSubmitted(final BloodPressureAddDialog bloodPressureAddDialog, final MeasurementItem<BloodPressure> measurementItem) {
-        mPresenter.onAddMeasurementClicked(measurementItem);
+    public void onAddItem(final BloodPressureAddDialog bloodPressureAddDialog, final MeasurementItem<BloodPressure> measurementItem) {
+        mPresenter.onAddItem(measurementItem);
         bloodPressureAddDialog.dismiss();
     }
 
@@ -71,7 +74,7 @@ public class BloodPressureActivity extends AppCompatActivity
 
     @Override
     public void showEditDialogForItem(final BloodPressureMeasurement item) {
-
+        BloodPressureEditDialog.createDialog(item).show(getFragmentManager(), null);
     }
 
     @Override
@@ -87,5 +90,14 @@ public class BloodPressureActivity extends AppCompatActivity
     @Override
     public void showNotification(final String message) {
         Snackbar.make(mAddedValues, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onUpdateItem(
+            final BloodPressureEditDialog bloodPressureEditDialog,
+            final BloodPressureMeasurement originalItem,
+            final MeasurementItem<BloodPressure> updates) {
+        mPresenter.onUpdateItem(originalItem, updates);
+        bloodPressureEditDialog.dismiss();
     }
 }

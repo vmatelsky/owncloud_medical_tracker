@@ -11,9 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.vlabs.medicinetracker.R;
+import com.vlabs.medicinetracker.db.BloodPressureMeasurement;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
 import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 import com.vlabs.medicinetracker.units.metric.mmHgArt;
+
+import org.parceler.Parcels;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,23 +26,29 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.selectDate;
 
 /**
- * Created by vlad on 3/25/16.
+ * Created by vlad on 3/28/16.
  */
-public class BloodPressureAddDialog extends DialogFragment {
+public class BloodPressureEditDialog extends DialogFragment {
+
+    private static final String EDIT_ITEM_KEY = "edit item key";
 
     public interface Listener {
-        void onAddItem(final BloodPressureAddDialog bloodPressureAddDialog, final MeasurementItem<BloodPressure> measurementItem);
+        void onUpdateItem(final BloodPressureEditDialog bloodPressureEditDialog, final BloodPressureMeasurement originalItem, final MeasurementItem<BloodPressure> updates);
     }
 
-    public static BloodPressureAddDialog createAddDialog() {
-        return new BloodPressureAddDialog();
-    }
+    public static BloodPressureEditDialog createDialog(final BloodPressureMeasurement item) {
+        final Bundle bundle = new Bundle();
 
+        bundle.putParcelable(EDIT_ITEM_KEY, Parcels.wrap(item));
+
+        final BloodPressureEditDialog dialog = new BloodPressureEditDialog();
+        dialog.setArguments(bundle);
+        return dialog;
+    }
 
     @Bind(R.id.systolic)
     EditText mSystolic;
@@ -50,7 +59,8 @@ public class BloodPressureAddDialog extends DialogFragment {
     @Bind(R.id.measurement_date)
     TextView mMeasureDate;
 
-    private Date mWeightMeasureDate = currentDate();
+    private BloodPressureMeasurement mOriginalItem;
+    private Date mWeightMeasureDate;
 
     private Listener getListener() {
         Activity activity = getActivity();
@@ -66,6 +76,9 @@ public class BloodPressureAddDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_PopupOverlay);
 
+        mOriginalItem = Parcels.unwrap(getArguments().getParcelable(EDIT_ITEM_KEY));
+
+        mWeightMeasureDate = mOriginalItem.measureDate;
     }
 
     @Override
@@ -73,7 +86,11 @@ public class BloodPressureAddDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+
         updateMeasurementDateOnView();
+
+        mSystolic.setText(mOriginalItem.systolic.toString());
+        mDiastolic.setText(mOriginalItem.diastolic.toString());
     }
 
     @Override
@@ -97,7 +114,7 @@ public class BloodPressureAddDialog extends DialogFragment {
 
             final BloodPressure bloodPressure = new BloodPressure(systolic, diastolic);
             final MeasurementItem<BloodPressure> measurementItem = new MeasurementItem<>(bloodPressure, mWeightMeasureDate);
-            getListener().onAddItem(this, measurementItem);
+            getListener().onUpdateItem(this, mOriginalItem, measurementItem);
         } catch (NumberFormatException ex) {
             Snackbar.make(view, "Transformation error", Snackbar.LENGTH_LONG).show();
         }

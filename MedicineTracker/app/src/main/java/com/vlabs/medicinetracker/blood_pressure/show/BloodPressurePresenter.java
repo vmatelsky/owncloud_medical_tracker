@@ -32,18 +32,20 @@ public class BloodPressurePresenter {
         mView.showAddItemDialog();
     }
 
-    public void onAddMeasurementClicked(final MeasurementItem<BloodPressure> measurementItem) {
+    public void onAddItem(final MeasurementItem<BloodPressure> measurementItem) {
         mAdapter.addItem(mModel.save(measurementItem));
     }
 
     public boolean onLongClick(final int position) {
-        final BloodPressureMeasurement item = mAdapter.getItemByPosition(position);
-//        mView.showEditDialogForItem(item);
-        mView.showNotification(mAdapter.getItemByPosition(position) + " long clicked");
-        return true;
+        return false;
     }
 
     public void onClick(final int position) {
-        mView.showNotification(mAdapter.getItemByPosition(position) + " clicked");
+        final BloodPressureMeasurement item = mAdapter.getItemByPosition(position);
+        mView.showEditDialogForItem(item);
+    }
+
+    public void onUpdateItem(final BloodPressureMeasurement originalItem, final MeasurementItem<BloodPressure> updates) {
+        mAdapter.update(originalItem, updates);
     }
 }

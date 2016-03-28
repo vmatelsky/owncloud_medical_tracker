@@ -12,6 +12,7 @@ import com.vlabs.medicinetracker.blood_pressure.ItemTouchHelperAdapter;
 import com.vlabs.medicinetracker.db.BloodPressureMeasurement;
 import com.vlabs.medicinetracker.db.BloodPressureMeasurementModel;
 import com.vlabs.medicinetracker.units.domain.BloodPressure;
+import com.vlabs.medicinetracker.units.domain.MeasurementItem;
 
 import java.util.Date;
 import java.util.List;
@@ -67,5 +68,11 @@ public class BloodPressureAdapter extends
 
     public BloodPressureMeasurement getItemByPosition(final int position) {
         return mData.get(position);
+    }
+
+    public void update(final BloodPressureMeasurement originalItem, final MeasurementItem<BloodPressure> updates) {
+        final int position = mData.indexOf(originalItem);
+        mData.set(position, mModel.update(originalItem, updates));
+        notifyItemChanged(position);
     }
 }
