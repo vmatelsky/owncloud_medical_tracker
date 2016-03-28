@@ -22,11 +22,19 @@
 
             <ImageButton
                 android:id="@+id/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/control_width"
+                android:layout_height="@dimen/control_height"
                 android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
-                android:src="@drawable/close"/>
+                android:src="@drawable/ic_close"/>
+
+            <ImageButton
+                android:id="@+id/confirm"
+                android:layout_width="@dimen/control_width"
+                android:layout_height="@dimen/control_height"
+                android:layout_gravity="center_vertical|right"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_confirm"/>
 
             </android.support.v7.widget.Toolbar>
 

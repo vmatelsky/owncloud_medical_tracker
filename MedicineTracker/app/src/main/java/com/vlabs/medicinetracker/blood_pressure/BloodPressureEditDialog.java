@@ -118,7 +118,7 @@ public class BloodPressureEditDialog extends DialogFragment {
         dismiss();
     }
 
-    @OnClick(R.id.add_blood_pressure_measurement)
+    @OnClick(R.id.confirm)
     void onAddBloodPressureMeasurementClicked(View view) {
         try {
             final mmHgArt systolic = new mmHgArt(mSystolic.getText().toString().trim());

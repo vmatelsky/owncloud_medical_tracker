@@ -11,7 +11,7 @@
               android:paddingTop="@dimen/activity_vertical_margin"
               app:layout_behavior="@string/appbar_scrolling_view_behavior"
               tools:context=".blood_pressure.show.BloodPressureActivity"
-              tools:showIn="@layout/blood_pressure_layout">
+              tools:showIn="@layout/add_blood_pressure">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -69,11 +69,5 @@
             android:paddingLeft="5dp"/>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/add_blood_pressure_measurement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/submit"/>
 
 </LinearLayout>
