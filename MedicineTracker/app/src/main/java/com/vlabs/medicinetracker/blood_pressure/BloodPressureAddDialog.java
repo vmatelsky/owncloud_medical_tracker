@@ -22,7 +22,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 import static com.vlabs.medicinetracker.utils.DataUtils.currentDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.formattedDate;
 import static com.vlabs.medicinetracker.utils.DataUtils.selectDate;
@@ -65,7 +64,6 @@ public class BloodPressureAddDialog extends DialogFragment {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_PopupOverlay);
-
     }
 
     @Override
@@ -87,6 +85,11 @@ public class BloodPressureAddDialog extends DialogFragment {
             mWeightMeasureDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
             updateMeasurementDateOnView();
         });
+    }
+
+    @OnClick(R.id.close)
+    void onCloseClicked(final View view) {
+        dismiss();
     }
 
     @OnClick(R.id.add_blood_pressure_measurement)

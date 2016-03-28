@@ -5,6 +5,8 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -82,6 +84,11 @@ public class BloodPressureEditDialog extends DialogFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -104,6 +111,11 @@ public class BloodPressureEditDialog extends DialogFragment {
             mWeightMeasureDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
             updateMeasurementDateOnView();
         });
+    }
+
+    @OnClick(R.id.close)
+    void onCloseClicked(final View view) {
+        dismiss();
     }
 
     @OnClick(R.id.add_blood_pressure_measurement)
