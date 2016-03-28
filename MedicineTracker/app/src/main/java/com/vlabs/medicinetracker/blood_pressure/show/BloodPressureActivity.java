@@ -86,6 +86,6 @@ public class BloodPressureActivity extends AppCompatActivity
 
     @Override
     public void showNotification(final String message) {
-        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mAddedValues, message, Snackbar.LENGTH_LONG).show();
     }
 }
